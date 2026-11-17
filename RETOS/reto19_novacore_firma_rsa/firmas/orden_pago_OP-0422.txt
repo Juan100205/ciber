@@ -1,0 +1,9 @@
+ORDEN DE PAGO OP-0422
+Emisor: NovaCore Solutions S.A.S.
+Area: Tesoreria
+Referencia: TRX-2026-0422
+Beneficiario: Ferreteria Los Andes Ltda.
+Identificacion: NIT 999000428-4
+Cuenta de destino: CTA-FICTICIA-30655
+Valor: $ 32.980.000 COP
+Autoriza: Gerencia Financiera

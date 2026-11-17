@@ -1,0 +1,22 @@
+Mambrú ha vuelto sigue sin resolver (200 puntos). Esto es todo lo que logramos comprobar:
+1. contenido del reto.txt tiene cinco capas de Base64. Al quitarlas queda una cadena de 1968 caracteres: los primeros 344 codifican un bloque RSA de 256 bytes y los otros 1624, una clave privada RSA en DER de 1217 bytes.
+2. El bloque se descifra con RSA-OAEP, SHA-256 y MGF1 con SHA-1. El resultado exacto es https://www.youtube.com/watch?v=aNCCuzYbyOx. Al abrirlo, el video apareció no disponible; no recuperamos su contenido.
+3. Probamos FLAG{ec319b9e1218c0e00ed9633df8b09185}, el MD5 de esa URL, y la plataforma la rechazó. La URL es una pista intermedia, no una flag confirmada. Un descifrado RSA con parámetros predeterminados también devolvió bytes engañosos.
+4. mambru1.0.txt, recuperado de una clase anterior, necesita 11 capas de Base64 y lleva a otro video: https://www.youtube.com/watch?v=cmJOvFKNeFA. Es un antecedente útil de la mecánica, pero tiene un ID distinto y no resuelve el reto actual.
+5. El siguiente paso útil es encontrar una copia, descripción o transcripción del video aNCCuzYbyOx. Si sigue inaccesible, conviene avanzar en otro reto.
+Para reproducir el hallazgo, desde la carpeta Mambru ha vuelto:
+python3 - <<'PY'
+from pathlib import Path
+import base64
+
+data = Path("contenido del reto.txt").read_bytes().strip()
+for _ in range(5):
+    data = base64.b64decode(data + b"=" * (-len(data) % 4))
+assert len(data) == 1968
+Path("rsa.bin").write_bytes(base64.b64decode(data[:344], validate=True))
+Path("private.der").write_bytes(base64.b64decode(data[344:], validate=True))
+PY
+
+openssl pkeyutl -decrypt -inkey private.der -keyform DER \
+  -in rsa.bin -pkeyopt rsa_padding_mode:oaep \
+  -pkeyopt rsa_oaep_md:sha256 -pkeyopt rsa_mgf1_md:sha1

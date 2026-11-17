@@ -1,0 +1,9 @@
+ORDEN DE PAGO OP-0406
+Emisor: NovaCore Solutions S.A.S.
+Area: Tesoreria
+Referencia: TRX-2026-0406
+Beneficiario: Clinica Santa Helena S.A.S.
+Identificacion: NIT 999000312-9
+Cuenta de destino: CTA-FICTICIA-14872
+Valor: $ 28.400.000 COP
+Autoriza: Gerencia Financiera

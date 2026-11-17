@@ -1,0 +1,9 @@
+services:
+  web:
+    build: .
+    image: maosuarez/ssrf-health-checker:latest
+    ports:
+      - "8000:8000"
+    environment:
+      FLAG: "FLAG{de_verdad_de_verdad_pensaste_que_era_tan_facil}"
+    restart: unless-stopped

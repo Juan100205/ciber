@@ -1,0 +1,9 @@
+ORDEN DE PAGO OP-0412
+Emisor: NovaCore Solutions S.A.S.
+Area: Tesoreria
+Referencia: TRX-2026-0412
+Beneficiario: Transportes Rio Grande S.A.S.
+Identificacion: NIT 999000268-5
+Cuenta de destino: CTA-FICTICIA-21904
+Valor: $ 41.250.000 COP
+Autoriza: Gerencia Financiera

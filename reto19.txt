@@ -1,0 +1,8 @@
+NovaCore - Mensaje Original
+970
+ 0  0
+Bienvenidos al reto más difícil de todo el CTF.
+
+Deben encontrar tres cosas: El mensaje original, el mensaje cifrado y la llave pública con la que verifican la firma.
+
+Cada hallazgo vale 1000.

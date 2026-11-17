@@ -1,0 +1,9 @@
+ORDEN DE PAGO OP-0416
+Emisor: NovaCore Solutions S.A.S.
+Area: Tesoreria
+Referencia: TRX-2026-0416
+Beneficiario: Agroinsumos del Valle Ltda.
+Identificacion: NIT 999000187-1
+Cuenta de destino: CTA-FICTICIA-56310
+Valor: $ 54.100.000 COP
+Autoriza: Gerencia Financiera

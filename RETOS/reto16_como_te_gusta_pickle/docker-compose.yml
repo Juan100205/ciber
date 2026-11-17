@@ -1,0 +1,6 @@
+services:
+  web:
+    build: .
+    image: maosuarez/pickle-prefs:latest
+    ports: ["8000:8000"]
+    restart: unless-stopped

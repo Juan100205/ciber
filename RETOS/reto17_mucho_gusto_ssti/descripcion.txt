@@ -1,0 +1,16 @@
+Mucho gusto
+600
+ 0  0
+Te saludamos por tu nombre, tal cual nos lo des. Eso sí, los guiones bajos nos dan alergia; todo lo demás es bienvenido… hasta lo que no deberías escribir.
+
+Matematicas Hijo (Cost: 20 points)
+... 0 ... (Cost: 40 points)Mucho gusto
+600
+ 0  0
+Te saludamos por tu nombre, tal cual nos lo des. Eso sí, los guiones bajos nos dan alergia; todo lo demás es bienvenido… hasta lo que no deberías escribir.
+
+Matematicas Hijo (Cost: 20 points)
+Prueba a saludarte con {{7*7}}. Si te responde 49, no estás hablando con un saludo: estás hablando con una plantilla.
+
+... 0 ... (Cost: 40 points)
+El filtro solo revisa el campo name. ¿Qué pasa con los otros parámetros de la URL?

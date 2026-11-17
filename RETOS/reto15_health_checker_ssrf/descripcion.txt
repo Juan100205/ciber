@@ -1,0 +1,4 @@
+Health Checker
+600
+ 0  0
+Tenemos un verificador de URLs que comprueba si tu sitio está vivo. Lo montamos con microservicios; algunos corren puertas adentro y confían ciegamente en quien les toca desde la misma casa.

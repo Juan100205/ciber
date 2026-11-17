@@ -1,0 +1,3 @@
+Escanea el código QR y encuentra la bandera que contiene.
+
+qr_url.png

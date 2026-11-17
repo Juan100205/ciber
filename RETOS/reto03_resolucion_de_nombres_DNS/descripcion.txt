@@ -1,0 +1,4 @@
+Resolución de nombres
+400
+ 0  0
+El equipo de soporte jura que la máquina de respaldos está limpia. “Solo resuelve nombres de dominio, nada raro”, dijeron. Nosotros capturamos una hora de su tráfico y, efectivamente, está resolviendo nombres sin parar. Encontrarás un par de cosas que alguien dejó botadas por ahí, pero el premio no se regala tan fácil. Presta atención a dónde habla la máquina cuando cree que nadie la escucha. Ah, y no te enamores del primer alfabeto que reconozcas.
