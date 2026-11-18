@@ -1,0 +1,9 @@
+PLAN DE AUDITORÍA PREVIA AL LANZAMIENTO
+
+Alcance:
+1. Mecanismos de autenticación.
+2. Credenciales y permisos de usuarios.
+3. Registros de acceso.
+4. Autenticidad e integridad de documentos financieros.
+
+El lanzamiento de la plataforma depende del resultado de esta revisión.

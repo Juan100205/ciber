@@ -1,0 +1,5 @@
+CONTROL DE CIFRADO
+
+Archivo: reporte_cifrado_gestion_humana.enc
+Algoritmo: AES-256-CBC, salida en Base64
+Vector de inicialización (hexadecimal): c07a15e93d6f28b4a1907e5dc2483fb6

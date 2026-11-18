@@ -1,0 +1,5 @@
+CONTROL DE CIFRADO
+
+Archivo: conciliacion_septiembre.enc (retirado)
+Algoritmo: AES-256-CBC
+Vector de inicialización (hexadecimal): 58c1e07ab94d36f2120fbd6ea7395c84

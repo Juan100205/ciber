@@ -1,0 +1,4 @@
+MEMORANDO
+
+Asunto: terminal interna.
+Escriba ayuda para ver las órdenes. Las órdenes de mantenimiento son exclusivas de Operaciones.

@@ -1,0 +1,5 @@
+LISTA DE CHEQUEO
+
+Autenticación: en revisión.
+Permisos: en revisión.
+Respaldos: revisado.

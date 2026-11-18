@@ -1,0 +1,6 @@
+Para no olvidarlo
+
+carta_sin_enviar: DES-CBC, en hexadecimal.
+La llave quedó en la tabla llavero de la base de operaciones.
+El vector lo dejé donde reporté lo del buscador del correo: nadie lo revisó.
+Y no todo lo que hay en esa base sale en la lista de tablas.

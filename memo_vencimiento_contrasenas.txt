@@ -1,0 +1,6 @@
+MEMORANDO
+
+Para: todo el personal
+Asunto: vencimiento de contraseñas
+
+Las contraseñas vencidas se cambian en el portal de autoservicio. La cuenta conserva sus permisos después del cambio.

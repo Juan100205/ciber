@@ -1,0 +1,8 @@
+MEMORANDO
+
+Para: equipo auditor
+Asunto: acceso al repositorio de custodia
+
+El repositorio no aparece en el menú de la plataforma. Su acceso está junto al certificado de custodia, en Seguridad y auditoría.
+
+El acta de custodia documental indica cuál es el código.

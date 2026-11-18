@@ -1,0 +1,6 @@
+HALLAZGOS 2025
+
+1. Rotación de contraseñas incompleta.
+2. Permisos sin revisar en Operaciones.
+
+Estado: cerrados.

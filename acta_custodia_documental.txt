@@ -1,0 +1,6 @@
+ACTA DE CUSTODIA DOCUMENTAL
+Referencia: AUD-2026-0194
+
+Auditoría Interna abrió un repositorio de custodia para los documentos confidenciales de la revisión.
+
+El código de custodia no se escribe en ningún documento. Es el Mensaje DES ya descifrado, tal como queda.

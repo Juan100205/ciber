@@ -1,0 +1,5 @@
+CONTROL DE CIFRADO
+
+Archivo: informe_reservado_tesoreria_v0.enc
+Algoritmo: AES-256-CBC, salida en Base64
+Vector de inicialización (hexadecimal): 4b9e27d1a06c83f5e2197dc04a6bf138

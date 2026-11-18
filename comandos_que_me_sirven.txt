@@ -1,0 +1,5 @@
+ayuda
+servicios
+registros
+lo de la base: en el correo de Sistemas
+no usar sudo: queda en el historial

@@ -212,4 +212,11 @@ Reto 13  FLAG{24c2886252fdd830c4fa3c80544d67b0}
 Reto 15  FLAG{33944ccbc48a1c0170d71f908cfeae14}
 Reto 16  FLAG{604db99b954342cf324953c7a606cbe4}
 Reto 17  FLAG{f55cc16f919378e35e2939353c57c12b}
+Reto 21  FLAG{6c4ac552216760b66573a17d0ffaae3f}
 ```
+
+### Reto 21 — Un Vigenere fácil (CRYPTO · 95 pts) ✅
+- Vigenère de clave de **1 letra** = César con **desplazamiento 10** (`vybow`→`lorem`).
+- Texto plano = `lorem ipsum` repetido (relleno/decoy, sin mensaje oculto), 5692 chars.
+- Flag = `FLAG{ md5(texto_descifrado_completo_sin_espacios) }` = `FLAG{6c4ac552216760b66573a17d0ffaae3f}`.
+- Detalle y script: `reto21_un_vigenere_facil/` (`solucion.md`, `solve.py`).

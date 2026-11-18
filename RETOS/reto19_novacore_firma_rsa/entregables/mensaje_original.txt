@@ -1,0 +1,9 @@
+ORDEN DE PAGO OP-0430
+Emisor: NovaCore Solutions S.A.S.
+Area: Tesoreria
+Referencia: TRX-2026-0430
+Beneficiario: Comercial Altamira S.A.S.
+Identificacion: NIT 999000589-0
+Cuenta de destino: CTA-FICTICIA-77120
+Valor: $ 86.300.000 COP
+Autoriza: Gerencia Financiera
