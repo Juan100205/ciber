@@ -186,6 +186,19 @@ openssl pkeyutl -decrypt -inkey private.der -keyform DER -in rsa.bin \
 - Hash SHA-256 `9a7d5a74...` = una línea de un cántico de la hinchada de Boca (música de Los Palmeras, "Aprenderás a llorar").
 - Se probaron ~8 000 variantes de la letra (líneas, sub-frases, tildes, mayúsculas, espacios). Pendiente: el *wording* exacto byte-a-byte del autor.
 
+### Reto 19 — NovaCore · Mensaje Original (CRYPTO firma RSA + WEB) — cadena resuelta
+- Cadena: `COMUNICADO_OFICIAL.zip` → steghide en 4 imágenes → sitio `novacore-seven.vercel.app` → SQLi en login → cripto **NC1** (SHA-256 keystream + XOR) → terminal MySQL (`tesoreria`) → llaves DES → código de bóveda `LO_MAS_INTIMO_NUNCA_SE_ENCUENTRA` → mensaje OP-0430 + `SIGNATURE.sig`.
+- Hallazgo central: la firma (RSA-1024, PKCS#1 v1.5 + SHA-256) **no verifica** el mensaje OP-0430 → **firma forjada** (fraude de $86.300.000 a Comercial Altamira).
+- Vulnerabilidades: SQLi, XSS, credenciales expuestas, permisos excesivos, integridad sin control.
+- Pendiente: formato de flag aceptado y el `informe_reservado_tesoreria.enc` definitivo (sin llave AES localizada).
+- Detalle completo: `reto19_novacore_firma_rsa/INFORME_FINAL.md` (y `SOLUCION_COMPLETA.md`, `PROCESO_RESOLUCION.md`, `solve_full_chain.py`).
+
+### Retos 18 (Morat) y 20 (Gorillaz) — CRYPTO hash — pendientes
+- Ambos dan un SHA-256 de una contraseña basada en gustos musicales (canción de Morat con colaboración femenina / fecha especial de Gorillaz). Enunciados en `reto18_morat_hash/` y `reto20_gorillaz_hash/`.
+
+### Reto 8 (Vigenère en español) y Reto 12 (OSINT Antipinzas, Bogotá) — pendientes
+- Enunciados en sus carpetas; sin solución aún.
+
 ### Reto 3 — Resolución de nombres (DNS) — sin evidencia
 - Requiere archivo de captura `.pcap` (no entregado). Sin él no es resoluble.
 
